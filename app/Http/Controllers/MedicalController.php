@@ -31,7 +31,7 @@ class MedicalController extends Controller
     }
 
     public function show(MedicalData $data) {
-        return $data->with('user')->first();
+        return $data->with('user')->find($data->id);
     }
 
     public function delete(MedicalData $data) {

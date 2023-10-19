@@ -88,8 +88,9 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function userProfile() {
-        return response()->json(auth()->user());
+        return response()->json(auth()->user()->load('medicalData'));
     }
+
     /**
      * Get the token array structure.
      *
