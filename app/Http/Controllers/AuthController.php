@@ -34,6 +34,16 @@ class AuthController extends Controller
         }
         return $this->createNewToken($token);
     }
+
+    public function update(Request $request , User $user){
+        $request->validate([
+            'email' => 'email|unique:users,email,' . $user->id,
+        ]);
+        $user->update($request->all());
+        return response()->json([
+            'message' => 'User successfully Updated',
+        ], 201);
+    }
     /**
      * Register a User.
      *

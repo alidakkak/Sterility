@@ -14,7 +14,8 @@ class MedicalController extends Controller
         // $date = MedicalData::all();
         // return MedicalResource::collection($date);
 
-        return MedicalData::with('personalData')->get();
+        return MedicalData::with('user')
+            ->get();
     }
 
     public function store(StoreMedicalRequest $request) {
@@ -30,7 +31,7 @@ class MedicalController extends Controller
     }
 
     public function show(MedicalData $data) {
-        return MedicalResource::make($data);
+        return $data->with('user')->first();
     }
 
     public function delete(MedicalData $data) {

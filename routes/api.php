@@ -21,10 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
-//Route::group( ['middleware' => 'jwt.auth'], function () {
+Route::group( ['middleware' => 'jwt.auth'], function () {
 
     Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     Route::get('/user-profile', [\App\Http\Controllers\AuthController::class, 'userProfile']);
+    Route::post('/update/{user}', [\App\Http\Controllers\AuthController::class, 'update']);
 
 
     Route::get('/getFemale', [\App\Http\Controllers\UserController::class, 'getFemale']);
@@ -51,5 +52,5 @@ Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register
     //// Clinic
         Route::get('/clinic',[\App\Http\Controllers\ClinicController::class, 'index']);
     Route::post('/clinic',[\App\Http\Controllers\ClinicController::class, 'store']);
-//});
+});
 
