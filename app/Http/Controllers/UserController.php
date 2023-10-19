@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function Laravel\Prompts\select;
 
 class UserController extends Controller
 {
@@ -15,6 +16,7 @@ class UserController extends Controller
             ->get();
         return $female;
     }
+
 
     public function getMale() {
         $male = User::where('gender', 'male')
@@ -75,6 +77,6 @@ class UserController extends Controller
             return  ["Nationality"=>
                 array_merge( $results->take(3)->toArray(),["4"=>array_combine(["country","total"],["others",$total])])];
         }
-    }
 
+    }
 }

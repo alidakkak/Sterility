@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MedicalController;
 use App\Http\Controllers\PersonalDateController;
 use Illuminate\Http\Request;
@@ -25,7 +26,11 @@ Route::group( ['middleware' => 'jwt.auth'], function () {
 
     Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     Route::get('/user-profile', [\App\Http\Controllers\AuthController::class, 'userProfile']);
-    Route::post('/update/{user}', [\App\Http\Controllers\AuthController::class, 'update']);
+
+    //Route::post('/update/{user}', [\App\Http\Controllers\AuthController::class, 'update']);
+
+    Route::post('update-profile',[AuthController::class,'update_profile']);
+
 
 
     Route::get('/getFemale', [\App\Http\Controllers\UserController::class, 'getFemale']);
@@ -45,7 +50,7 @@ Route::group( ['middleware' => 'jwt.auth'], function () {
 
     Route::get('/medicals',[MedicalController::class, 'index']);
     Route::post('/medicals',[MedicalController::class, 'store']);
-    Route::patch('/medicals/{data}',[MedicalController::class, 'update']);
+    Route::post('/medicals/{data}',[MedicalController::class, 'update']);
     Route::get('/medicals/{data}',[MedicalController::class, 'show']);
     Route::delete('/medicals/{data}',[MedicalController::class, 'delete']);
 
