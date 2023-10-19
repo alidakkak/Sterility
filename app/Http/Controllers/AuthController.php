@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\StorePersonalDateRequest;
+use App\Http\Requests\UpdatePersonalDateRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -102,5 +104,13 @@ class AuthController extends Controller
             'user' => auth()->user()
         ]);
     }
+    public function update_profile(UpdatePersonalDateRequest $request){
+        $user = auth()->user();
+        $user->update($request->all());
+        return response()->json(['message' => 'User successfully updated'], 202);
+    }
+
+
+
 
 }

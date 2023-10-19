@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MedicalController;
 use App\Http\Controllers\PersonalDateController;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register
 
     Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     Route::get('/user-profile', [\App\Http\Controllers\AuthController::class, 'userProfile']);
+    Route::post('update-profile',[AuthController::class,'update_profile']);
 
 
     Route::get('/getFemale', [\App\Http\Controllers\UserController::class, 'getFemale']);

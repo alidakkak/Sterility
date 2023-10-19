@@ -22,12 +22,13 @@ class UpdatePersonalDateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string',
-            //'date' => 'required',
-            'gender' => 'string',
-            'country' => 'string',
-            'email' => 'email|unique:personal_data,email,'. $this->id,
-            'phone' => 'numeric'
+            'name' => 'sometimes|required|string',
+            'date' => 'sometimes|required',
+            'gender' => 'sometimes|required',
+            'country' => 'sometimes|required|string',
+            'email' => 'sometimes|required|unique:personal_data,email',
+            'phone' => 'sometimes|required|numeric',
+            "password"=>"sometimes|required|confirmed|min:6",
         ];
     }
 }

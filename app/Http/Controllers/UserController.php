@@ -15,6 +15,7 @@ class UserController extends Controller
         return $female;
     }
 
+
     public function getMale() {
         $male = User::where('gender', 'male')->get();
         return $male;
