@@ -24,10 +24,10 @@ class MedicalController extends Controller
         return MedicalResource::make($data);
     }
 
-    public function update(UpdateMedicalRequest $request, MedicalData $data) {
-        $request->validated($request->all());
-        $data->update($request->all());
-        return MedicalResource::make($data);
+    public function update(UpdateMedicalRequest $request) {
+        $medical = MedicalData::where('user_id', auth()->user()->id)->first();
+        $medical->update($request->all());
+        return MedicalResource::make($medical);
     }
 
     public function show(MedicalData $data) {

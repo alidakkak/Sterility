@@ -50,7 +50,7 @@ Route::group( ['middleware' => 'jwt.auth'], function () {
 
     Route::get('/medicals',[MedicalController::class, 'index']);
     Route::post('/medicals',[MedicalController::class, 'store']);
-    Route::post('/medicals/{data}',[MedicalController::class, 'update']);
+    Route::post('/medical',[MedicalController::class, 'update']);
     Route::get('/medicals/{data}',[MedicalController::class, 'show']);
     Route::delete('/medicals/{data}',[MedicalController::class, 'delete']);
 

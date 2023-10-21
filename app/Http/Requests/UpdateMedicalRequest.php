@@ -22,18 +22,6 @@ class UpdateMedicalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'weight' => 'numeric',
-            'height' => 'numeric',
-            'do_you_have_children' => 'string',
-            'do_you_have_an_illness' => 'string',
-            'are_you_taking_medication' => 'string',
-            'number_of_years_of_marriage' => 'string',
-            'have_you_been_treated_before' =>'string',
-            'what_type_of_treatment' => 'string',
-            'how_many_times_was_the_treatment_taken' => 'string',
-            'do_you_have_varicocele' => 'string',
-            'is_there_a_previous_analysis' => 'string',
-            'are_there_other_diseases' => 'string',
         ];
     }
 }
