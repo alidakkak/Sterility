@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PersonalDateResource extends JsonResource
+class QuestionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +17,8 @@ class PersonalDateResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'date' => $this->date,
             'gender' => $this->gender,
-            'country' => $this->country,
-            'email' => $this->email,
-            'phone' => $this->phone,
+            'image' => $this->image ? asset($this->image) : "null"
         ];
     }
 }

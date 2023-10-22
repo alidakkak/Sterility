@@ -2,6 +2,9 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\StorePersonalDateRequest;
 use App\Http\Requests\UpdatePersonalDateRequest;
+use App\Http\Resources\UserResource;
+use App\Models\Question;
+use App\Models\QuestionUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -87,9 +90,23 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function userProfile() {
-        return response()->json(auth()->user()->load('medicalData'));
+//    public function userProfile()
+//    {
+//        $user = auth()->user();
+//        $all = QuestionUser::with('question')->where('user_id', $user->id)->get();
+//        return response()->json($all);
+//    }
+
+    public function userProfile()
+    {
+        $user = auth()->user();
+       // $all = QuestionUser::with('question', 'user')->where('user_id', $user->id)->get();
+        $all = User::where('id',$user->id)->with('questionUser.question', 'questionUser')->get();
+        return response()->json($all);
     }
+
+
+
 
     /**
      * Get the token array structure.

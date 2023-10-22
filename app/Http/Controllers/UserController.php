@@ -13,7 +13,7 @@ class UserController extends Controller
     public function getFemale() {
         $female = User::where('gender', 'female')
             ->where('type', 'user')
-            ->with('medicalData')
+            ->with('questionUser', 'questionUser.question')
             ->get();
         return $female;
     }
@@ -21,7 +21,7 @@ class UserController extends Controller
     public function getMale() {
         $male = User::where('type', 'user')
             ->where('gender', 'male')
-            ->with('medicalData')
+            ->with('questionUser', 'questionUser.question')
             ->get();
         return $male;
     }
@@ -31,7 +31,7 @@ class UserController extends Controller
         $lastWeek = Carbon::now()->subWeek();
         return User::where('created_at','>=', $lastWeek)
             ->where('type', 'user')
-            ->with('medicalData')
+            ->with('questionUser', 'questionUser.question')
             ->get();
     }
 
@@ -42,7 +42,7 @@ class UserController extends Controller
     }
 
     public function show(User $user) {
-        return $user->with('medicalData')->find($user->id);
+        return $user->with('questionUser', 'questionUser.question')->find($user->id);
     }
 
         public function getRate(Request $request) {

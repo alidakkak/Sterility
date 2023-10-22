@@ -20,9 +20,13 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $guarded = ['id'];
 
-    public function medicalData()
-    {
-        return $this->hasOne(MedicalData::class);
+//    public function medicalData()
+//    {
+//        return $this->hasOne(MedicalData::class);
+//    }
+
+    public function questionUser() {
+        return $this->hasMany(QuestionUser::class);
     }
 
     /**

@@ -22,17 +22,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+
 Route::group( ['middleware' => 'jwt.auth'], function () {
 
     Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     Route::get('/user-profile', [\App\Http\Controllers\AuthController::class, 'userProfile']);
-
-    //Route::post('/update/{user}', [\App\Http\Controllers\AuthController::class, 'update']);
-
     Route::post('update-profile',[AuthController::class,'update_profile']);
 
 
-
+    /////// User
     Route::get('/getFemale', [\App\Http\Controllers\UserController::class, 'getFemale']);
     Route::get('/getMale', [\App\Http\Controllers\UserController::class, 'getMale']);
     Route::get('/getLastWeek', [\App\Http\Controllers\UserController::class, 'getLastWeek']);
@@ -42,20 +40,21 @@ Route::group( ['middleware' => 'jwt.auth'], function () {
     Route::post('/getRate', [\App\Http\Controllers\UserController::class, 'getRate']);
 
 
-    Route::get('/personals',[PersonalDateController::class, 'index']);
-    Route::post('/personals',[PersonalDateController::class, 'store']);
-    Route::patch('/personals/{data}',[PersonalDateController::class, 'update']);
-    Route::get('/personals/{data}',[PersonalDateController::class, 'show']);
-    Route::delete('/personals/{data}',[PersonalDateController::class, 'delete']);
+    //////Question
+    Route::get('/questions',[\App\Http\Controllers\QuestionController::class, 'index']);
+    Route::post('/questions',[\App\Http\Controllers\QuestionController::class, 'store']);
+    Route::post('/questions/{question}',[\App\Http\Controllers\QuestionController::class, 'update']);
+    Route::get('/questions/{question}',[\App\Http\Controllers\QuestionController::class, 'show']);
+    Route::delete('/questions/{question}',[\App\Http\Controllers\QuestionController::class, 'delete']);
 
-    Route::get('/medicals',[MedicalController::class, 'index']);
-    Route::post('/medicals',[MedicalController::class, 'store']);
-    Route::post('/medical',[MedicalController::class, 'update']);
-    Route::get('/medicals/{data}',[MedicalController::class, 'show']);
-    Route::delete('/medicals/{data}',[MedicalController::class, 'delete']);
+
+    ///// Answer
+    Route::post('/answers',[\App\Http\Controllers\AnswerController::class, 'store']);
+    Route::get('/answers',[\App\Http\Controllers\AnswerController::class, 'index']);
+    Route::post('/answer',[\App\Http\Controllers\AnswerController::class, 'update']);
 
     //// Clinic
-        Route::get('/clinic',[\App\Http\Controllers\ClinicController::class, 'index']);
+    Route::get('/clinic',[\App\Http\Controllers\ClinicController::class, 'index']);
     Route::post('/clinic',[\App\Http\Controllers\ClinicController::class, 'store']);
 });
 
