@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
              'email' => 'admin@gmail.com',
              'password' => '00000000',
              'type' => 'admin',
-             'gender' => 'male',
              'country' => 'Saudi arabia',
              'date' => '2000'
          ]);

@@ -49,14 +49,14 @@ class UserController extends Controller
             $status = $request->status;
           //  return $status;
             if($status == 'male') {
-                $totalUsers = User::count();
-                $maleUsers = User::where('gender', 'male')
+                $totalUsers = User::where('type' ,'!=', 'admin')->count();
+                $maleUsers = User::where('gender', 'male')->where('type', 'user')
                     ->count();
                 $malePercentage = ($maleUsers / $totalUsers) * 100;
                 return $malePercentage;
             } else if ($status == 'female') {
-                $totalUsers = User::count();
-                $femaleUsers = User::where('gender', 'female')->count();
+                $totalUsers = User::where('type' ,'!=', 'admin')->count();
+                $femaleUsers = User::where('gender', 'female')->where('type','user')->count();
                 $femalePercentage = ($femaleUsers / $totalUsers) * 100;
                 return $femalePercentage;
 
@@ -64,8 +64,8 @@ class UserController extends Controller
     }
 
     public function getNationalityPercentage() {
-        $results = DB::table('users as u')
-            ->select('u.country', DB::raw('ROUND((COUNT(u.country) * 100 / (SELECT COUNT(country) FROM users)), 2) as total'))
+        $results = DB::table('users as u')->where('type','!=', 'admin')
+            ->select('u.country', DB::raw('ROUND((COUNT(u.country) * 100 / (SELECT COUNT(country) FROM users where type != "admin")), 2) as total'))
             ->groupBy('u.country')
             ->orderBy('total', 'desc')
             ->get();
@@ -75,7 +75,7 @@ class UserController extends Controller
         elseif (count($results)>3) {
             $total=
                 DB::table('users as u')->select(
-                    DB::raw('ROUND((COUNT(u.country) * 100 / (SELECT COUNT(country) FROM users)), 2) as total'))
+                    DB::raw('ROUND((COUNT(u.country) * 100 / (SELECT COUNT(country) FROM users where type != "admin")), 2) as total'))
                     ->whereNOTIn("u.country",$results->pluck("country")->take(3)->toArray())->value("total");
             return  ["Nationality"=>
                 array_merge( $results->take(3)->toArray(),["4"=>array_combine(["country","total"],["others",$total])])];
