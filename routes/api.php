@@ -38,7 +38,7 @@ Route::group( ['middleware' => 'jwt.auth'], function () {
     Route::post('/users/{user}', [\App\Http\Controllers\UserController::class, 'update']);
     Route::get('/getNationalityPercentage', [\App\Http\Controllers\UserController::class, 'getNationalityPercentage']);
     Route::post('/getRate', [\App\Http\Controllers\UserController::class, 'getRate']);
-
+    Route::post('/addFile', [\App\Http\Controllers\UserController::class, 'addFile']);
 
     //////Question
     Route::get('/questions',[\App\Http\Controllers\QuestionController::class, 'index']);

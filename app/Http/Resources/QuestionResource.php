@@ -18,7 +18,7 @@ class QuestionResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'gender' => $this->gender,
-            'image' => $this->image ? asset($this->image) : "null"
+            'image' => $this->image ? asset($this->image) : null
         ];
     }
 }

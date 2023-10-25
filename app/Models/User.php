@@ -65,4 +65,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims() {
         return [];
     }
+
+    public function setFileAttribute ($file){
+        $newFileName = uniqid() . '_' . 'patient_attachments' . '.' . $file->extension();
+        $file->move(public_path('patient_attachments') , $newFileName);
+        return $this->attributes['file'] =  '/'.'patient_attachments'.'/' . $newFileName;
+    }
 }

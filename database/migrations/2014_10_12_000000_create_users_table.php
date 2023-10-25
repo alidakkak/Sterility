@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('phone')->nullable();
             $table->string('type')->default('user');
+            $table->string('file')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

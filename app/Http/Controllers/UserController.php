@@ -65,7 +65,8 @@ class UserController extends Controller
 
     public function getNationalityPercentage() {
         $results = DB::table('users as u')->where('type','!=', 'admin')
-            ->select('u.country', DB::raw('ROUND((COUNT(u.country) * 100 / (SELECT COUNT(country) FROM users where type != "admin")), 2) as total'))
+            ->select('u.country',
+                DB::raw('ROUND((COUNT(u.country) * 100 / (SELECT COUNT(country) FROM users where type != "admin")), 2) as total'))
             ->groupBy('u.country')
             ->orderBy('total', 'desc')
             ->get();
@@ -82,4 +83,12 @@ class UserController extends Controller
         }
 
     }
+
+    public function addFile(Request $request) {
+        $user = auth()->user();
+        $user->file = $request->file;
+        $user->save();
+        return $user;
+    }
+
 }
