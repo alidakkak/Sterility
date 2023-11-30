@@ -17,6 +17,7 @@ class QuestionResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'name_ar' => $this->name_ar,
             'gender' => $this->gender,
             'image' => $this->image ? asset($this->image) : null
         ];
